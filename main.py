@@ -1,5 +1,7 @@
+import pygame
 from solver import Sudoku_solver
 from button import Button
+from sudoku import Sudoku
 
 hints = [   
     # [0,2,0, 6,0,8, 0,0,0],
@@ -28,9 +30,6 @@ hints = [
     [0,0,0, 0,0,0, 0,0,0]
     ]
 
-
-import pygame
-from sudoku import Sudoku
 
 board_pos = 0,0
 border = 4

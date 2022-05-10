@@ -15,6 +15,9 @@ class Sudoku_solver:
         self.__sudoku = [[0 for j in range(9)] for i in range(9)]
 
     def update(self, sudoku):
+        
+        if not self.is_actually_solved():
+            self.set_sudoku(sudoku)
         for i in range(9):
             for j in range(9):
                 if self.__sudoku[i][j] != sudoku[i][j] and sudoku[i][j] != 0:
