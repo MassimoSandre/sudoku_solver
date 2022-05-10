@@ -50,7 +50,7 @@ class Button:
 
         self.__over_time = 0
     
-    def is_inside(self, pos:tuple(int,int)) -> bool:
+    def is_inside(self, pos) -> bool:
         """
         Checks whether an absolute position lays inside the button
 
@@ -96,7 +96,7 @@ class Button:
         """
         self.__onclick()
 
-    def show(self, screen:pygame.Surface, mousepos:tuple(int,int)) -> None:
+    def show(self, screen:pygame.Surface, mousepos) -> None:
         """
         Shows the button
 
