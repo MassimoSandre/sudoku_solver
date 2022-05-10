@@ -2,15 +2,32 @@ class Sudoku_solver:
     def __init__(self, sudoku=None):
         if sudoku == None:
             self.__sudoku = None
+        else:
+            self.__sudoku = [[sudoku[i][j] for j in range(9)] for i in range(9)]
+        
+
+
+    def set_sudoku(self, sudoku):
         self.__sudoku = [[sudoku[i][j] for j in range(9)] for i in range(9)]
         
 
-    def set_sudoku(self, sudoku):
-        self.__sudoku = sudoku
+    def clear(self):
+        self.__sudoku = [[0 for j in range(9)] for i in range(9)]
+
+    def update(self, sudoku):
+        for i in range(9):
+            for j in range(9):
+                if self.__sudoku[i][j] != sudoku[i][j] and sudoku[i][j] != 0:
+                    self.set_sudoku(sudoku)
+                    return
         
 
+
     def get_solution(self):
-        return [[self.__sudoku[i][j] for j in range(9)] for i in range(9)]
+        if self.is_actually_solved():
+            return [[self.__sudoku[i][j] for j in range(9)] for i in range(9)]
+        else:
+            return None
 
     def print_sudoku(self):
         for l in self.__sudoku:
@@ -20,7 +37,10 @@ class Sudoku_solver:
 
         print()
 
+
     def is_actually_solved(self):
+        if self.__sudoku == None:
+            return False
         for i in range(9):
             for j in range(9):
                 nums1 = [x for x in range(1,10)]
@@ -59,11 +79,21 @@ class Sudoku_solver:
                 for j in range(9):
                     if self.__sudoku[i][j] == 0:
                         nums = [x for x in range(1,10)]
+                        nums1 = [x for x in range(1,10)]
+                        nums2 = [x for x in range(1,10)]
+                        nums3 = [x for x in range(1,10)]
                         for k in range(9):
                             if self.__sudoku[i][k] in nums:
                                 nums.remove(self.__sudoku[i][k])
                             if self.__sudoku[k][j] in nums:
                                 nums.remove(self.__sudoku[k][j])
+                            try:
+                                if self.__sudoku[i][k] > 0:
+                                    nums1.remove(self.__sudoku[i][k])
+                                if self.__sudoku[k][j] > 0:
+                                    nums2.remove(self.__sudoku[k][j])
+                            except:
+                                return 
 
                         sqi = (i//3)*3
                         sqj = (j//3)*3
@@ -71,6 +101,11 @@ class Sudoku_solver:
                             for h in range(3):
                                 if self.__sudoku[sqi+k][sqj+h] in nums:
                                     nums.remove(self.__sudoku[sqi+k][sqj+h])
+                                try:
+                                    if self.__sudoku[sqi+k][sqj+h] > 0:
+                                        nums3.remove(self.__sudoku[sqi+k][sqj+h])
+                                except:
+                                    return
                         
                         if len(nums) == 1:
                             self.__sudoku[i][j] = nums[0]
