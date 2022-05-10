@@ -1,8 +1,44 @@
+""" 
+Button module
+
+The Button class allows to create, draw and handle buttons 
+
+    Usage example:
+
+    button = Button(pos=pos,width=width,height=height)
+    button.show(screen, mousepos)
+"""
+
 import pygame
 
-
 class Button:
-    def __init__(self,*, pos, width, height, value="", onclick=None, disabled=False, font=None) -> None:
+    """
+    A class designed to solve standard sudoku
+
+    Attributes:
+        __pos: A tuple of 2 integers, representing the absolute position (in pixel) of the center of the button
+        __width: An integer, representing the width of the button
+        __height: An integer, representing the height of the butotn
+        __onclick: A function that will be called when the button is clicked
+        disabled: A boolean, representing if the button is disabled or not
+        __value: A string that will be displayed on the button
+        __font: A pygame font used to write the string displayed on the button
+        __over_time: An integer, representing the amount of time the mouse cursor has been over the button
+    """
+
+    def __init__(self,*, pos, width:int, height:int, onclick=None, disabled:bool=False, value:str="",  font:pygame.font.Font=None) -> None:
+        """
+        Inits Button
+
+        Args:
+            pos: A tuple of 2 integers, representing the absolute position (in pixel) of the center of the button
+            width: An integer, representing the width of the button
+            height: An integer, representing the height of the butotn
+            onclick: A function that will be called when the button is clicked
+            disabled: A boolean, representing if the button is disabled or not
+            value: A string that will be displayed on the button
+            font: A pygame font used to write the string displayed on the button
+        """
         self.__pos = pos
         self.__width = width
         self.__height = height
@@ -14,7 +50,16 @@ class Button:
 
         self.__over_time = 0
     
-    def is_inside(self, pos):
+    def is_inside(self, pos:tuple(int,int)) -> bool:
+        """
+        Checks whether an absolute position lays inside the button
+
+        Args:
+            pos: A tuple of 2 integers, representing an absolute position
+
+        Returns:
+            True if the position pos lays inside the button, False if not    
+        """
         fx,fy = self.__pos[0] - self.__width//2, self.__pos[1] - self.__height//2
         tx,ty = pos
         if tx < fx:
@@ -29,15 +74,36 @@ class Button:
         return True
 
 
-    def enable(self):
+    def enable(self) -> None:
+        """
+        Enables the button
+
+        set the attribute disabled to False
+        """
         self.disabled = False
-    def disable(self):
+
+    def disable(self) -> None:
+        """
+        Disables the button
+
+        set the attribute disabled to True
+        """
         self.disabled = True
 
-    def click(self):
+    def click(self) -> None:
+        """
+        Call the onclick function of the button
+        """
         self.__onclick()
 
-    def show(self, screen, mousepos):
+    def show(self, screen:pygame.Surface, mousepos:tuple(int,int)) -> None:
+        """
+        Shows the button
+
+        Args:
+            screen: The pygame surface where the button will be drawn
+            mousepos: A tuple of 2 integers representing the absolute position of the mouse
+        """
         fx,fy = self.__pos[0] - self.__width//2, self.__pos[1] - self.__height//2
 
         if self.disabled:

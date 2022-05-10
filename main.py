@@ -1,5 +1,5 @@
 import pygame
-from solver import Sudoku_solver
+from sudoku_solver import Sudoku_solver
 from button import Button
 from sudoku import Sudoku
 
