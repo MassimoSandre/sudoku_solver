@@ -52,13 +52,13 @@ class Button:
     
     def is_inside(self, pos) -> bool:
         """
-        Checks whether an absolute position lays inside the button
+        Checks whether an absolute position lies inside the button
 
         Args:
             pos: A tuple of 2 integers, representing an absolute position
 
         Returns:
-            True if the position pos lays inside the button, False if not    
+            True if the position pos lies inside the button, False if not    
         """
         fx,fy = self.__pos[0] - self.__width//2, self.__pos[1] - self.__height//2
         tx,ty = pos

@@ -112,13 +112,13 @@ class Sudoku:
 
     def get_cell_from_coordinates(self, pos):
         """
-        Calculates the indexes of the cell in which an absolute position lays
+        Calculates the indexes of the cell in which an absolute position lies
 
         Args:
             pos: A tuple of 2 integers representing an absolute position (in pixel)
         
         Returns:
-            The indexes of the cell in which the provided position lays
+            The indexes of the cell in which the provided position lies
         """
         x,y = pos
         bi = (y - self.__board_pos[1]) // (3*self.__cell+self.__border)
